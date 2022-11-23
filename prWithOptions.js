@@ -77,6 +77,9 @@ function onProceedSelectedAppHasEnrolledInstrument(evt) {
     }
     paymentRequestPhonepe = null;
     paymentRequestGPay = null;
+    if (!!document.getElementById('dataUrlInput').value){
+          supportedInstrumentsPhonepe[0].data.url = document.getElementById('dataUrlInput').value;
+    }
     paymentRequestPhonepe = new PaymentRequest(supportedInstrumentsPhonepe, transactionDetails);
             
     paymentRequestPhonepe && paymentRequestPhonepe.hasEnrolledInstrument().then(function(result) {
@@ -170,6 +173,10 @@ function createPaymentRequest(bDirectApp, sAppUrl){
       return;
     }
   paymentRequestPhonepe && paymentRequestPhonepe.abort();
+  
+  if (!!document.getElementById('dataUrlInput').value){
+          supportedInstrumentsPhonepe[0].data.url = document.getElementById('dataUrlInput').value;
+  }
   paymentRequestPhonepe = new PaymentRequest(supportedInstrumentsPhonepe, transactionDetails);
   const transactionDetailsGPay = {
       id: "super-store-order-123-12312",
@@ -184,11 +191,17 @@ function createPaymentRequest(bDirectApp, sAppUrl){
   paymentRequestGPay && paymentRequestGPay.abort();
   paymentRequestGPay  = new PaymentRequest(supportedInstrumentGPay, transactionDetailsGPay);
   paymentRequestPhonepeStage && paymentRequestPhonepeStage.abort();
+  var stgdataUrl
+  if (!!document.getElementById('dataUrlInput').value){
+       stgdataUrl = document.getElementById('dataUrlInput').value;
+  } else {
+       stgdataUrl  = "upi://pay?pa=PRACT0@ybl&pn=PRACT0&am=1.0&mam=1.0&tid=YBLc6f12c2333b2495fbfd024b12ad43dc7&tr=T2002061921587731419308&tn=Payment%20for%20TX117785240954814000&mc=5311&mode=04&purpose=00"
+  }
   paymentRequestPhonepeStage = new PaymentRequest([{
           supportedMethods: ["https://mercury-stg.phonepe.com/transact/pay"],
           data: {
-              url: "upi://pay?pa=PRACT0@ybl&pn=PRACT0&am=1.0&mam=1.0&tid=YBLc6f12c2333b2495fbfd024b12ad43dc7&tr=T2002061921587731419308&tn=Payment%20for%20TX117785240954814000&mc=5311&mode=04&purpose=00",
-                    mobileNumber: "8308171711"
+              url: stgdataUrl,
+              mobileNumber: "8308171711"
           }
       }], transactionDetails);
   console.log("PaymentRequest created here ", paymentRequestPhonepeStage); 
