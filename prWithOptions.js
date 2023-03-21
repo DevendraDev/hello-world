@@ -113,7 +113,7 @@ function onProceedSelectedAppHasEnrolledInstrument(evt) {
                   label: 'Total',
                   amount: {
                     currency: 'INR',
-                    value: '100',
+                    value: '304',
                   }
                 }
               };
