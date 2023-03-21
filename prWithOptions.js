@@ -31,6 +31,7 @@ const supportedInstrumentsPhonepe = [{
       }                            
       ],
       transactionDetails = {
+       id: "super-store-order-123-12312",
       total: {
         label: 'Total',
         amount: {
