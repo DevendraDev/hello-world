@@ -36,7 +36,7 @@ const supportedInstrumentsPhonepe = [{
         label: 'Total',
         amount: {
           currency: 'INR',
-          value: '100',
+          value: '209',
         }
       }
     };
@@ -70,11 +70,11 @@ function onProceedSelectedAppHasEnrolledInstrument(evt) {
   if (selectedApp == "phonepe") {
      if(paymentRequestPhonepe) {
          console.log("Aborting paymentRequestPhonepe");
-         paymentRequestPhonepe.abort();
+//          paymentRequestPhonepe.abort();
     }
     if(paymentRequestGPay) {
          console.log("Aborting paymentRequestGPay");
-         paymentRequestGPay.abort();
+//          paymentRequestGPay.abort();
     }
     paymentRequestPhonepe = null;
     paymentRequestGPay = null;
@@ -99,11 +99,11 @@ function onProceedSelectedAppHasEnrolledInstrument(evt) {
       if (selectedApp == "gpay") {
         if(paymentRequestPhonepe) {
           console.log("Aborting paymentRequestPhonepe");
-          paymentRequestPhonepe.abort();
+//           paymentRequestPhonepe.abort();
         }
         if(paymentRequestGPay) {
           console.log("Aborting paymentRequestGPay");
-          paymentRequestGPay.abort();
+//           paymentRequestGPay.abort();
         }
         paymentRequestPhonepe = null;
         paymentRequestGPay = null;
@@ -189,9 +189,9 @@ function createPaymentRequest(bDirectApp, sAppUrl){
         }
       }
     };
-  paymentRequestGPay && paymentRequestGPay.abort();
+//   paymentRequestGPay && paymentRequestGPay.abort();
   paymentRequestGPay  = new PaymentRequest(supportedInstrumentGPay, transactionDetailsGPay);
-  paymentRequestPhonepeStage && paymentRequestPhonepeStage.abort();
+//   paymentRequestPhonepeStage && paymentRequestPhonepeStage.abort();
   var stgdataUrl
   if (!!document.getElementById('dataUrlInput').value){
        stgdataUrl = encodeURI(document.getElementById('dataUrlInput').value);
@@ -199,14 +199,14 @@ function createPaymentRequest(bDirectApp, sAppUrl){
        stgdataUrl  = "upi://pay?pa=PRACT0@ybl&pn=PRACT0&am=1.0&mam=1.0&tid=YBLc6f12c2333b2495fbfd024b12ad43dc7&tr=T2002061921587731419308&tn=Payment%20for%20TX117785240954814000&mc=5311&mode=04&purpose=00"
   }
   paymentRequestPhonepeStage = new PaymentRequest([{
-          supportedMethods: ["https://mercury-stg.phonepe.com/transact/pay"],
-          data: {
-              url: stgdataUrl,
-              mobileNumber: "8308171711"
+          "supportedMethods": ["https://mercury-stg.phonepe.com/transact/pay"],
+          "data": {
+              "url": stgdataUrl,
+              "mobileNumber": "8308171711"
           }
       }], transactionDetails);
   console.log("PaymentRequest created here ", paymentRequestPhonepeStage); 
-  paymentRequestOther && paymentRequestOther.abort();
+//   paymentRequestOther && paymentRequestOther.abort();
   paymentRequestOther  = new PaymentRequest(supportedInstrumnetOthers, transactionDetails);
 }
 
