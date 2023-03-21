@@ -49,7 +49,17 @@ const supportedInstrumentsPhonepe = [{
           currency: 'INR',
           value: '209',
         }
-      }
+      },
+      modifiers: {
+         data: {
+              url: "upi://pay?pa=PRACT0@ybl&pn=PRACT0&am=1.0&mam=1.0&tid=YBLc6f12c2333b2495fbfd024b12ad43dc7&tr=T2002061921587731419308&tn=Payment%20for%20TX117785240954814000&mc=5311&mode=04&purpose=00",
+              mobileNumber: "8308171711"
+          }
+      },
+      data: {
+              url: "upi://pay?pa=PRACT0@ybl&pn=PRACT0&am=1.0&mam=1.0&tid=YBLc6f12c2333b2495fbfd024b12ad43dc7&tr=T2002061921587731419308&tn=Payment%20for%20TX117785240954814000&mc=5311&mode=04&purpose=00",
+              mobileNumber: "8308171711"
+          }
     };
 
 function reset(){
@@ -229,18 +239,18 @@ paymentRequestPaytm = new PaymentRequest(supportedInstrumentPaytm, transactionDe
   }
   paymentRequestPhonepeStage = new PaymentRequest([{
           "supportedMethods": ["https://mercury-stg.phonepe.com/transact/pay"],
-          data: {
-             pa: 'PRACT0@ybl',
-             pn: 'PRACT',
-             tr: 'T2002061921587731419308',  // your custom transaction reference ID
-             url: 'upi://pay?pa=PRACT0@ybl&pn=PRACT0&am=1.0&mam=1.0&tid=YBLc6f12c2333b2495fbfd024b12ad43dc7&tr=T2002061921587731419308&tn=Payment%20for%20TX117785240954814000&mc=5311&mode=04&purpose=00',
-             mc: '5311', // your merchant category code
-             tn: 'Payment',
-           }
-//           "data": {
-//               "url": stgdataUrl,
-//               "mobileNumber": "8308171711"
-//           }
+//           data: {
+//              pa: 'PRACT0@ybl',
+//              pn: 'PRACT',
+//              tr: 'T2002061921587731419308',  // your custom transaction reference ID
+//              url: 'upi://pay?pa=PRACT0@ybl&pn=PRACT0&am=1.0&mam=1.0&tid=YBLc6f12c2333b2495fbfd024b12ad43dc7&tr=T2002061921587731419308&tn=Payment%20for%20TX117785240954814000&mc=5311&mode=04&purpose=00',
+//              mc: '5311', // your merchant category code
+//              tn: 'Payment',
+//            }
+          "data": {
+              "url": stgdataUrl,
+              "mobileNumber": "8308171711"
+          }
       }], transactionDetails);
   console.log("PaymentRequest created here ", paymentRequestPhonepeStage); 
 //   paymentRequestOther && paymentRequestOther.abort();
