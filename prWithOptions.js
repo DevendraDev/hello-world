@@ -1,4 +1,4 @@
-let paymentRequestTimeout, paymentRequestPhonepe, paymentRequestPhonepeStage, paymentRequestGPay, paymentRequestOther, timeOutCounter= 0;
+let paymentRequestTimeout, paymentRequestPhonepe, paymentRequestPhonepeStage, paymentRequestGPay, paymentRequestPaytm, paymentRequestOther, timeOutCounter= 0;
 const supportedInstrumentsPhonepe = [{
           supportedMethods: ["https://mercury.phonepe.com/transact/pay"],
           data: {
@@ -219,6 +219,7 @@ function createPaymentRequest(bDirectApp, sAppUrl){
     };
 //   paymentRequestGPay && paymentRequestGPay.abort();
   paymentRequestGPay  = new PaymentRequest(supportedInstrumentGPay, transactionDetailsGPay);
+paymentRequestPaytm = new PaymentRequest(supportedInstrumentPaytm, transactionDetailsGPay);
 //   paymentRequestPhonepeStage && paymentRequestPhonepeStage.abort();
   var stgdataUrl
   if (!!document.getElementById('dataUrlInput').value){
