@@ -17,6 +17,17 @@ const supportedInstrumentsPhonepe = [{
              tn: 'Payment',
            },
          }],
+       supportedInstrumentPaytm = [{
+          supportedMethods: ["https://securegw.paytm.in/pay"],
+          data: {
+             pa: 'PRACT0@ybl',
+             pn: 'PRACT',
+             tr: 'T2002061921587731419308',  // your custom transaction reference ID
+             url: 'upi://pay?pa=PRACT0@ybl&pn=PRACT0&am=1.0&mam=1.0&tid=YBLc6f12c2333b2495fbfd024b12ad43dc7&tr=T2002061921587731419308&tn=Payment%20for%20TX117785240954814000&mc=5311&mode=04&purpose=00',
+             mc: '5311', // your merchant category code
+             tn: 'Payment',
+           },
+         }],
 //       supportedInstrumnetOthers = [{
 //           supportedMethods: ["https://mercury.phonepe.com/transact/pay", "https://tez.google.com/pay"],
 // //           data: {
@@ -56,6 +67,9 @@ function getSelctedApp() {
   if(document.getElementById("gpay").checked == true) {
     return "gpay";
   }
+ if(document.getElementById("paytm").checked == true) {
+    return "paytm";
+  }
   if(document.getElementById("phonepegpay").checked == true) {
     return "phonepegpay";
   }
@@ -94,6 +108,13 @@ function onProceedSelectedAppHasEnrolledInstrument(evt) {
           info("For Phonepe stage hasEnrolledInstrument result= " + result); 
       }).catch(function(err) {
           info("For Phonepe stage hasEnrolledInstrument error handler and error= " + err); 
+      });
+      }
+if (selectedApp == "paytm") {
+        paymentRequestPaytm  && paymentRequestPaytm.hasEnrolledInstrument().then(function(result) {
+          info("For Paytm stage hasEnrolledInstrument result= " + result); 
+      }).catch(function(err) {
+          info("For Paytm stage hasEnrolledInstrument error handler and error= " + err); 
       });
       }
       if (selectedApp == "gpay") {
@@ -141,6 +162,13 @@ function onProceedSelectedAppCanMakePayment(evt) {
           info("For Phonpepe canMakePayment result= " + result); 
       }).catch(function(err) {
           info("For Phonpepe canMakePayment error handler and error= " + err); 
+      });
+  } 
+if (selectedApp == "paytm") {
+   paymentRequestPaytm && paymentRequestPaytm.canMakePayment().then(function(result) {
+          info("For Paytm canMakePayment result= " + result); 
+      }).catch(function(err) {
+          info("For Paytm canMakePayment error handler and error= " + err); 
       });
   } 
   if (selectedApp == "phonepestage") {
@@ -246,6 +274,13 @@ function onPayClick() {
     }
     if (selectedApp == "phonepestage") {
       paymentRequestPhonepeStage.show()
+                        .then(handlePaymentResponse)
+                        .catch(function(err) {
+                          info(err);
+                        });
+    }
+if (selectedApp == "paytm") {
+      paymentRequestPaytm.show()
                         .then(handlePaymentResponse)
                         .catch(function(err) {
                           info(err);
