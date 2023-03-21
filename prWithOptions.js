@@ -185,7 +185,7 @@ function createPaymentRequest(bDirectApp, sAppUrl){
         label: 'Total',
         amount: {
           currency: 'INR',
-          value: '100',
+          value: '205',
         }
       }
     };
