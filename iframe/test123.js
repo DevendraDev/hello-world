@@ -19,4 +19,7 @@
 //     }
   }
 
-window.addEventListener("load", myFunction, false);
+// window.addEventListener("load", myFunction, false);
+$(document).ready(function (e) {
+  myFunction();
+})
