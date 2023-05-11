@@ -19,4 +19,4 @@
     }
   }
 
-document.body.addEventListener("load", init, false);
+document.body.addEventListener("load", myFunction, false);
