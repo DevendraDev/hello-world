@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--<link rel="icon" href="favicon.ico">-->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self';
+                                                      script-src
+                                                       https://code.jquery.com
+                                                       https://cdnjs.cloudflare.com
+                                                       https://stackpath.bootstrapcdn.com
+                                                       https://apis.google.com
+                                                       https://accounts.google.com/
+                                                       https://ajax.googleapis.com/
+                                                       https://www.google.com
+                                                       https://www.gstatic.com
+                                                       'unsafe-inline' 'nonce-EDNnf03nceIOfn39fn3e9h3sdfa'
+                                                       'unsafe-eval' 'self' ;
+                                                      style-src 'unsafe-inline'  https://stackpath.bootstrapcdn.com https://fonts.googleapis.com 'self';
+                                                      frame-src https://accounts.google.com/ https://www.google.com 'self';
+                                                      img-src 'self';
+                                                      connect-src 'self';
+                                                      font-src https://fonts.googleapis.com *;
+                                                      ">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Phonepe | Authentication</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+  <link rel="stylesheet" href="/olympus/im/static/css/custom.css">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
+        rel="stylesheet">
+
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+</head>
+<body onload="myFunction()">
+
+<input type="hidden" name="googleClientId" id="googleClientId" value="{{googleClientId}}">
+<input type="hidden" name="state" id="state" value="{{state}}">
+
+
+<div class="background-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 ">
+        <div class="logo">
+          <!-- <img
+                   src="/olympus/im/static/images/loginPhonepe-logo.svg"
+                   alt="loginPhonepe"
+           /> -->
+          <!--<p class="phonepeTitle">PhonePe</p>-->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-container">
+        <div class="form">
+          <form method="post" id="loginForm" action="/olympus/im/login/password" novalidate>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="heading">Sign In</div>
+              </div>
+            </div>
+
+            {{#if passwordAuthEnabled}}
+              <input type="hidden" name="type" value="PASSWORD">
+              <input type="hidden" name="state" value="{{state}}">
+
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="input-container">
+                    <div class="input-label">Username</div>
+                    <!--Input Box-->
+                    <div class="image-input-container">
+                      <img src="/olympus/im/static/images/user.svg" alt="" class="input-icon">
+                      <input
+                          id="login-username"
+                          name="username"
+                          placeholder="Enter e-mail or phone number"
+                          type="text"
+                          class="custom-input-box"/>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="input-container">
+                    <div class="input-label">Password</div>
+                    <!--Input Box-->
+                    <div class="image-input-container">
+                      <img src="/olympus/im/static/images/password-lock.svg" alt="" class="input-icon">
+                      <input
+                          id="password"
+                          name="password"
+                          placeholder="Enter Password"
+                          type="password"
+                          class="custom-input-box"/>
+                      <div id="otp-button" data-toggle="modal" data-target="#getOTPModal"
+                           style="display:none">GET OTP
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row pb-2">
+                <div class="col-sm-12">
+                  <div class="g-recaptcha" data-sitekey="{{siteKey}}" style="display: flex; justify-content: center;"></div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="button-container">
+                    <button class="submit-button" type="submit">SIGN IN</button>
+                  </div>
+                </div>
+              </div>
+          </form>
+            <br/>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="button-container">
+                      <a href="javascript:;" class="sign-in-with-google-button" id="signInButton"></a>
+                </div>
+              </div>
+            </div>
+            <br/>
+        </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!--JQuery-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+<!--Popper.js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+<!--Bootstrap-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+
+<script src="https://accounts.google.com/gsi/client"></script>
+
+<!--CryspSDK.js for browserFingerprint-->
+<script src="/olympus/im/static/js/CryspSDK.js"></script>
+<script src="/olympus/im/static/js/customV2.js"></script>
+
+<script src="/olympus/im/static/js/loginV2.js"></script>
+
+<script>
+  function inIframe () {
+    try {
+        return window.self !== window.top;
+    } catch (e) {
+        return true;
+    }
+  }
+
+  function myFunction() {
+    if(inIframe()){
+      document.getElementById("signInButton").setAttribute("rel", "noreferrer");
+      document.getElementById("signInButton").setAttribute("target", "_blank");
+    }
+  }
+</script>
+</body>
+</html>
