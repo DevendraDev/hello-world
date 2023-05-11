@@ -13,10 +13,10 @@
 
   function myFunction() {
     console.log("inside body onload function");
-    if(inIframe()){
+//     if(inIframe()){
       document.getElementById("signInButton").setAttribute("rel", "noreferrer");
       document.getElementById("signInButton").setAttribute("target", "_blank");
-    }
+//     }
   }
 
 window.addEventListener("load", myFunction, false);
