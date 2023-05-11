@@ -169,6 +169,7 @@
 
 <script>
   function inIframe () {
+  console.log("inIframe function");
     try {
         return window.self !== window.top;
     } catch (e) {
@@ -177,7 +178,9 @@
   }
 
   function myFunction() {
+console.log("my function");
     if(inIframe()){
+console.log("its an iframe");
       document.getElementById("signInButton").setAttribute("rel", "noreferrer");
       document.getElementById("signInButton").setAttribute("target", "_blank");
     }
