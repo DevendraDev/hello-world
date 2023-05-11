@@ -39,6 +39,8 @@
 
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
+  <script src="test123.js"></script>
+
 </head>
 <body onload="myFunction()">
 
@@ -166,25 +168,5 @@
 <script src="/olympus/im/static/js/customV2.js"></script>
 
 <script src="/olympus/im/static/js/loginV2.js"></script>
-
-<script>
-  function inIframe () {
-  console.log("inIframe function");
-    try {
-        return window.self !== window.top;
-    } catch (e) {
-        return true;
-    }
-  }
-
-  function myFunction() {
-console.log("my function");
-    if(inIframe()){
-console.log("its an iframe");
-      document.getElementById("signInButton").setAttribute("rel", "noreferrer");
-      document.getElementById("signInButton").setAttribute("target", "_blank");
-    }
-  }
-</script>
 </body>
 </html>
