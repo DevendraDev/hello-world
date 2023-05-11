@@ -18,3 +18,5 @@
       document.getElementById("signInButton").setAttribute("target", "_blank");
     }
   }
+
+document.body.addEventListener("load", init, false);
